@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 if __name__ == "__main__":
     s = {
         "alice" : {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'},

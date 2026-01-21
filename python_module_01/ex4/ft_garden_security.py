@@ -9,16 +9,16 @@ class SecurePlant:
         self.__age = age
 
     @property
-    def get_height(self):
+    def height(self):
         """
         Reading without modification.
         """
         return (self.__height)
 
-    @get_height.setter
-    def set_height(self, height: int):
+    @height.setter
+    def height(self, height: int):
         """
-        Modify the values ​​of our variable.
+        Modify the values of our variable.
         """
         if (height < 0):
             print(f"Invalid operation attempted: height {height}cm", end="")
@@ -28,16 +28,16 @@ class SecurePlant:
             print(f"Height updated: {self.__height}cm [OK]")
 
     @property
-    def get_age(self):
+    def age(self):
         """
         Reading without modification.
         """
         return (self.__age)
 
-    @get_age.setter
-    def set_age(self, age: int):
+    @age.setter
+    def age(self, age: int):
         """
-        Modify the values ​​of our variable.
+        Modify the values of our variables.
         """
         if (age < 0):
             print(f"Invalid operation attempted: {age} days", end="")
@@ -52,9 +52,9 @@ if __name__ == "__main__":
     plant1 = SecurePlant("Rose", 5, 30)
     plant2 = SecurePlant("Oak", 200, 365)
     print(f"Plant created: {plant1.name}")
-    plant1.set_height = 25
-    plant1.set_age = 30
+    plant1.height = 25
+    plant1.age = 30
     print()
-    plant2.set_height = -5
-    print(f"\nCurrent plant: {plant1.name} ({plant1.get_height}cm,", end="")
-    print(f" {plant1.get_age} days")
+    plant2.height = -5
+    print(f"\nCurrent plant: {plant1.name} ({plant1.height}cm,", end="")
+    print(f" {plant1.age} days")

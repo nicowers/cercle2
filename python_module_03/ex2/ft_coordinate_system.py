@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import math
 
@@ -16,7 +17,7 @@ def parse_arguments(arg):
             x = int(args[0])
             y = int(args[1])
             z = int(args[2])
-            return (x, y, z)    
+            return (x, y, z)
         except ValueError:
             raise ValueError("Please enter 1 string, in the following format: \"x,y,z\"")
 
