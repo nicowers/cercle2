@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print("Unique achievements:",{achievements for player in players for achievements in players[player]["achievements"]})
     print("Active regions:", {players[player]["region"] for player in players if players[player]["active_player"] == True})
     print("\n=== Combined Analysis ===")
-    print("Total players:", len(players))
+    print("Total players: ", len(players))
     print("Total unique achievements:", len({achievements for player in players for achievements in players[player]["achievements"]}))
     print("Average score:", sum(players[player]["score"]for player in players) / len(players))
     print("Top performer:", top_perfomer())
