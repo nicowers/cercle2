@@ -1,48 +1,104 @@
 class GardenManager:
+    """
+    This class manages multiple gardens, owners, and global garden statistics.
+    """
     class GardenStats:
-        def __init__(self):
+        """
+        This subclass tracks global statistics for all gardens.
+        """
+        def __init__(self) -> None:
+            """
+            The constructor takes parameters that allow objects to
+            be instantiated
+            """
             self.total_plant = 0
             self.total_grow = 0
 
-        def record_add_plant(self):
+        def record_add_plant(self) -> None:
+            """
+            Record when a plant is added to a garden.
+            """
             self.total_plant += 1
-    
-        def record_add_growth(self):
+
+        def record_add_growth(self) -> None:
+            """
+            Record plant growth events.
+            """
             self.total_grow += 1
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         self.owners = {}
         self.stats = self.GardenStats()
 
-
-    def add_garden(self, owner: str, garden: str):
+    def add_garden(self, owner: str, garden: str) -> None:
+        """
+        Register a new garden for an owner.
+        """
         self.owners[owner] = garden
 
-    def add_plant_to_garden(self, owner: str, plant):
+    def add_plant_to_garden(self, owner: str, plant: str) -> str:
+        """
+        Add a plant to the specified owner's garden.
+        """
         garden = self.owners.get(owner)
         garden.add_plant(plant)
         self.stats.record_add_plant()
         print(f"Added {plant.name} to {owner}'s garden")
 
-    def grow_plants_in_garden(self, owner: str):
+    def grow_plants_in_garden(self, owner: str) -> None:
+        """
+        Grow all plants in the specified owner's garden.
+        """
         garden = self.owners.get(owner)
         garden.grow_all()
 
-    def total_gardens(self):
+    def total_gardens(self) -> int:
+        """
+        Return the total number of gardens managed.
+        """
         return len(self.owners)
 
-    def create_garden_network(self):
-        manager = self
-            
+    @classmethod
+    def create_garden_network(cls) -> "GardenManager":
+        """
+        Create a network connection between gardens (placeholder).
+        """
+        manager = cls()
+        manager.add_garden("Alice", Garden("Alice"))
+        manager.add_garden("Bob", Garden("Bob"))
+        return (manager)
+
+    @staticmethod
+    def validate_h(height: int) -> bool:
+        if height >= 0:
+            return True
+        return False
+
+
 class Garden:
-    def __init__(self, owner: str):
+    """
+    Represents a garden containing multiple plants.
+    """
+    def __init__(self, owner: str) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         self.owner = owner
         self.plants = []
 
-    def add_plant(self, plant):
+    def add_plant(self, plant: str) -> None:
+        """
+        Add a plant to the garden.
+        """
         self.plants.append(plant)
 
-    def grow_all(self):
+    def grow_all(self) -> int:
+        """
+        Grow all plants in the garden by one unit.
+        """
         growth = 0
         print(f"\n{self.owner} is helping all plants grow...")
         for plant in self.plants:
@@ -51,14 +107,19 @@ class Garden:
             print(f"{plant.name} grew 1cm")
         return growth
 
-    def garden_report(self):
+    def garden_report(self) -> int:
+        """
+        Display and compute a summary report of the garden.
+        """
         print(f"\n=== {self.owner}'s Garden Report ===")
         print("Plants in garden:")
 
         regular = flowering = prize = 0
         score = 0
+        is_valid_h = True
 
         for plant in self.plants:
+            is_valid_h = GardenManager.validate_h(plant.height) and is_valid_h
             print(f"- {plant.get_info()}")
 
             if isinstance(plant, PrizeFlower):
@@ -71,45 +132,95 @@ class Garden:
                 regular += 1
                 score += plant.height
 
-        print(f"\nPlants added: {len(self.plants)}, Total growth: {len(self.plants)}cm")
-        print(f"Plant types: {regular} regular, {flowering} flowering, {prize} prize flowers\n")
-        print(f"Height validation test: {all(p.height > 0 for p in self.plants)}")
+        print(f"\nPlants added: {len(self.plants)},", end="")
+        print(f" Total growth: {len(self.plants)}cm")
+        print(f"Plant types: {regular} regular,", end="")
+        print(f" {flowering} flowering, {prize} prize flowers\n")
+        print(f"Height validation test: {is_valid_h}")
 
         return score
 
+
 class Plant:
-    def __init__(self, name: str, height: str):
+    """
+    Base class representing a generic plant.
+    """
+    def __init__(self, name: str, height: int) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         self.name = name
         self.height = height
 
-    def grow(self):
+    def grow(self) -> None:
+        """
+        Increase the plant height by one unit.
+        """
         self.height += 1
 
-    def get_info(self):
-        return(f"-{self.name}: {self.height}cm")
+    def get_info(self) -> str:
+        """
+        Print variables in a string.
+        """
+        return (f"{self.name}: {self.height}cm")
+
 
 class FloweringPlant(Plant):
-    def __init__(self, name: str, height: str, color: str, blooming=1):
+    """
+    Represents a plant that can produce flowers.
+    """
+    def __init__(self, name: str, height: str, color: str, blooming=1) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         super().__init__(name, height)
         self.color = color
         self.blooming = blooming
-        
-    def get_info(self):
+
+    def get_info(self) -> str:
+        """
+        Return formatted information about the flowering plant,
+        depending on the value of our variable
+        """
         if self.blooming == 1:
-            return(f"{self.name}: {self.height}cm {self.color} flowers (blooming)")
-        return(f"{self.name}: {self.height}cm {self.color} flowers (not blooming)")
-    
+            return (
+                f"{self.name}: {self.height}cm, "
+                f"{self.color} flowers (blooming)"
+                )
+        return (
+            f"{self.name}: {self.height}cm, "
+            f"{self.color} flowers (not blooming)"
+            )
+
+
 class PrizeFlower(FloweringPlant):
-    def __init__(self, name, height, color,prize_point , blooming=1):
+    """
+    Special flowering plant that awards prize points.
+    """
+    def __init__(
+            self, name: str, height: int, color: str,
+            prize_point: int, blooming=1
+            ):
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         super().__init__(name, height, color, blooming)
         self.prize_point = prize_point
 
-
-    def get_info(self):
+    def get_info(self) -> None:
+        """
+        Return formatted information about the flowering plant,
+        depending on the value of our variable
+        """
         if self.blooming == 1:
-            return(f"{self.name}: {self.height}cm {self.color} flowers (blooming), Prize points: {self.prize_point}")
-        return(f"{self.name}: {self.height}cm {self.color} flowers (not blooming), Prize points: {self.prize_point}")
-
+            return (
+                f"{self.name}: {self.height}cm, {self.color} "
+                f"flowers (blooming), Prize points: {self.prize_point}"
+                )
+        return (
+            f"{self.name}: {self.height}cm, {self.color} "
+            f"flowers (not blooming), Prize points: {self.prize_point}"
+            )
 
 
 if __name__ == "__main__":
@@ -117,22 +228,11 @@ if __name__ == "__main__":
     rose = FloweringPlant("Rose", 25, "red", True)
     sunflower = PrizeFlower("Sunflower", 50, "yellow", 10, True)
     print("=== Garden Management System Demo ===\n")
-    manager = GardenManager()
-    garden = Garden("Alice")
-
-    manager.add_garden("Alice", garden)
-    manager = GardenManager()
-    garden = Garden("Alice")
-    manager.add_garden("Alice", garden)
-
+    manager = GardenManager.create_garden_network()
     manager.add_plant_to_garden("Alice", oak)
     manager.add_plant_to_garden("Alice", rose)
     manager.add_plant_to_garden("Alice", sunflower)
-
     manager.grow_plants_in_garden("Alice")
-
-    alice_score = garden.garden_report()
-
+    alice_score = manager.owners["Alice"].garden_report()
     print(f"Garden scores - Alice: {alice_score}, Bob: 92")
     print(f"Total gardens managed: {manager.total_gardens()}")
-    

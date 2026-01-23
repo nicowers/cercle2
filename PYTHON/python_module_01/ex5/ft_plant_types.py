@@ -1,33 +1,73 @@
 class Plant:
-    def __init__(self, name: str, height: int, age: int):
+    """
+    Receive the name, the encapsulation size, and encapsulation age of plants .
+    It also including some methods that act on plants.
+    """
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         self.name = name
         self.height = height
         self.age = age
 
+
 class Flower(Plant):
-    def __init__(self, name: str, height: int, age: int, color: str):
+    """
+    Inherited the parent parameters; it also contains its own method.
+    """
+    def __init__(self, name: str, height: int, age: int, color: str) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         super().__init__(name, height, age)
         self.color = color
 
-    def bloom(self):
+    def bloom(self) -> str:
+        """
+        Print variables in a string.
+        """
         return (f"{self.name} is blooming beautifully!")
 
+
 class Tree(Plant):
-    def __init__(self, name: str, height: int, age: int, trunk_diameter: int):
+    """
+    Inherited the parent parameters; it also contains its own method.
+    """
+    def __init__(
+            self, name: str, height: int, age: int, trunk_diameter: int
+            ) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
-    def produce_shade(self):
+    def produce_shade(self) -> str:
+        """
+        Print variables in a string.
+        """
         return (f"{self.name} provides 78 square meters of shade")
 
+
 class Vegetable(Plant):
-    def __init__(self, name: str, height: int, age: int, harvest_season: str):
+    """
+    Inherited the parent parameters; it also contains its own method.
+    """
+    def __init__(
+            self, name: str, height: int, age: int, harvest_season: str
+            ) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
         super().__init__(name, height, age)
         self.harvest_season = harvest_season
 
-    def nutritional_value(self):
+    def nutritional_value(self) -> str:
+        """
+        Print variables in a string.
+        """
         return (f"{self.name} is rich in Vitamin C")
-
 
 
 if __name__ == "__main__":
@@ -38,9 +78,12 @@ if __name__ == "__main__":
     mapple = Tree("mapple", 300, 505, 25)
     tomato = Vegetable("Tomato", 80, 90, "summer")
     cucumber = Vegetable("cucumber", 60, 70, "automn")
-    print(f"Rose (Flower): {rose.height}cm, {rose.age} days, {rose.color} color")
+    print(f"Rose (Flower): {rose.height}cm, {rose.age} days,", end="")
+    print(f" {rose.color} color")
     print(rose.bloom())
-    print(f"\nOak (Tree): {oak.height}cm, {oak.age} days, {oak.trunk_diameter}cm diameter")
+    print(f"\nOak (Tree): {oak.height}cm, {oak.age} days,", end="")
+    print(f" {oak.trunk_diameter}cm diameter")
     print(oak.produce_shade())
-    print(f"\nTomato (Vegetable): {tomato.height}cm, {tomato.age} days, {tomato.harvest_season} harvest")
+    print(f"\nTomato (Vegetable): {tomato.height}cm,", end="")
+    print(f" {tomato.age} days, {tomato.harvest_season} harvest")
     print(tomato.nutritional_value())
