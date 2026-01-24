@@ -1,3 +1,85 @@
+class Plant:
+    """
+    Base class representing a generic plant.
+    """
+    def __init__(self, name: str, height: int) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
+        self.name = name
+        self.height = height
+
+    def grow(self) -> None:
+        """
+        Increase the plant height by one unit.
+        """
+        self.height += 1
+
+    def get_info(self) -> str:
+        """
+        Print variables in a string.
+        """
+        return (f"{self.name}: {self.height}cm")
+
+
+class FloweringPlant(Plant):
+    """
+    Represents a plant that can produce flowers.
+    """
+    def __init__(self, name: str, height: int, color: str, blooming=1) -> None:
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
+        super().__init__(name, height)
+        self.color = color
+        self.blooming = blooming
+
+    def get_info(self) -> str:
+        """
+        Return formatted information about the flowering plant,
+        depending on the value of our variable
+        """
+        if self.blooming == 1:
+            return (
+                f"{self.name}: {self.height}cm, "
+                f"{self.color} flowers (blooming)"
+                )
+        return (
+            f"{self.name}: {self.height}cm, "
+            f"{self.color} flowers (not blooming)"
+            )
+
+
+class PrizeFlower(FloweringPlant):
+    """
+    Special flowering plant that awards prize points.
+    """
+    def __init__(
+            self, name: str, height: int, color: str,
+            prize_point: int, blooming=1
+            ):
+        """
+        The constructor takes parameters that allow objects to be instantiated
+        """
+        super().__init__(name, height, color, blooming)
+        self.prize_point = prize_point
+
+    def get_info(self) -> str:
+        """
+        Return formatted information about the flowering plant,
+        depending on the value of our variable
+        """
+        if self.blooming == 1:
+            return (
+                f"{self.name}: {self.height}cm, {self.color} "
+                f"flowers (blooming), Prize points: {self.prize_point}"
+                )
+        return (
+            f"{self.name}: {self.height}cm, {self.color} "
+            f"flowers (not blooming), Prize points: {self.prize_point}"
+            )
+
+
 class GardenManager:
     """
     This class manages multiple gardens, owners, and global garden statistics.
@@ -20,12 +102,6 @@ class GardenManager:
             """
             self.total_plant += 1
 
-        def record_add_growth(self) -> None:
-            """
-            Record plant growth events.
-            """
-            self.total_grow += 1
-
     def __init__(self) -> None:
         """
         The constructor takes parameters that allow objects to be instantiated
@@ -39,7 +115,7 @@ class GardenManager:
         """
         self.owners[owner] = garden
 
-    def add_plant_to_garden(self, owner: str, plant: str) -> str:
+    def add_plant_to_garden(self, owner: str, plant: Plant) -> str:
         """
         Add a plant to the specified owner's garden.
         """
@@ -139,88 +215,6 @@ class Garden:
         print(f"Height validation test: {is_valid_h}")
 
         return score
-
-
-class Plant:
-    """
-    Base class representing a generic plant.
-    """
-    def __init__(self, name: str, height: int) -> None:
-        """
-        The constructor takes parameters that allow objects to be instantiated
-        """
-        self.name = name
-        self.height = height
-
-    def grow(self) -> None:
-        """
-        Increase the plant height by one unit.
-        """
-        self.height += 1
-
-    def get_info(self) -> str:
-        """
-        Print variables in a string.
-        """
-        return (f"{self.name}: {self.height}cm")
-
-
-class FloweringPlant(Plant):
-    """
-    Represents a plant that can produce flowers.
-    """
-    def __init__(self, name: str, height: str, color: str, blooming=1) -> None:
-        """
-        The constructor takes parameters that allow objects to be instantiated
-        """
-        super().__init__(name, height)
-        self.color = color
-        self.blooming = blooming
-
-    def get_info(self) -> str:
-        """
-        Return formatted information about the flowering plant,
-        depending on the value of our variable
-        """
-        if self.blooming == 1:
-            return (
-                f"{self.name}: {self.height}cm, "
-                f"{self.color} flowers (blooming)"
-                )
-        return (
-            f"{self.name}: {self.height}cm, "
-            f"{self.color} flowers (not blooming)"
-            )
-
-
-class PrizeFlower(FloweringPlant):
-    """
-    Special flowering plant that awards prize points.
-    """
-    def __init__(
-            self, name: str, height: int, color: str,
-            prize_point: int, blooming=1
-            ):
-        """
-        The constructor takes parameters that allow objects to be instantiated
-        """
-        super().__init__(name, height, color, blooming)
-        self.prize_point = prize_point
-
-    def get_info(self) -> None:
-        """
-        Return formatted information about the flowering plant,
-        depending on the value of our variable
-        """
-        if self.blooming == 1:
-            return (
-                f"{self.name}: {self.height}cm, {self.color} "
-                f"flowers (blooming), Prize points: {self.prize_point}"
-                )
-        return (
-            f"{self.name}: {self.height}cm, {self.color} "
-            f"flowers (not blooming), Prize points: {self.prize_point}"
-            )
 
 
 if __name__ == "__main__":
