@@ -57,7 +57,7 @@ class PrizeFlower(FloweringPlant):
     def __init__(
             self, name: str, height: int, color: str,
             prize_point: int, blooming=1
-            ):
+            ) -> None:
         """
         The constructor takes parameters that allow objects to be instantiated
         """
@@ -115,7 +115,7 @@ class GardenManager:
         """
         self.owners[owner] = garden
 
-    def add_plant_to_garden(self, owner: str, plant: Plant) -> str:
+    def add_plant_to_garden(self, owner: str, plant: Plant) -> None:
         """
         Add a plant to the specified owner's garden.
         """

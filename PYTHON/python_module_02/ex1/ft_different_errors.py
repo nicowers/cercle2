@@ -1,4 +1,4 @@
-def garden_operations():
+def garden_operations() -> str:
     """Demonstrate and handle different built-in Python error types."""
     res = 0
     try :
@@ -33,7 +33,7 @@ def garden_operations():
         print("Caught an error, but program continues!")
 
 
-def test_error_types():
+def test_error_types() -> str:
     """Run all garden error demonstrations and confirm program stability."""
     print("=== Garden Error Types Demo ===\n")
     garden_operations()

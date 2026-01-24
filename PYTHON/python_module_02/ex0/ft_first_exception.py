@@ -1,4 +1,4 @@
-def check_temperature(temp_str):
+def check_temperature(temp_str: str) -> str:
     """Validate and display whether a temperature is suitable for plants."""
     temp = 0
     try:
@@ -12,7 +12,7 @@ def check_temperature(temp_str):
     except ValueError:
         print(f"Error: '{temp_str}' is not a valid number")
 
-def test_temperature_input():
+def test_temperature_input() -> str:
     """Prompt the user for multiple temperature inputs and test each one."""
     for i in range(4):
         temp_str = input("Testing temperature: ")

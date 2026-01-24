@@ -12,7 +12,7 @@ class WaterError(GardenError):
     def __init__(self, message="Not enough water in the tank!"):
         super().__init__(message)
 
-def raise_error():
+def raise_error() -> None:
     """Demonstrate raising and catching custom garden exceptions."""
     try:
         print("Testing PlantError...")
@@ -37,3 +37,4 @@ def raise_error():
 if __name__ == "__main__":
     print("=== Custom Garden Errors Demo ===\n")
     raise_error()
+    print("\nAll custom error types work correctly!")

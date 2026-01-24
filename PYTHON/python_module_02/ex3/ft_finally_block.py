@@ -1,4 +1,4 @@
-def water_plants(plant_list):
+def water_plants(plant_list : list) -> str:
     """Water each plant in the list and ensure cleanup even if an error occurs."""
     str = ""
     print("Opening watering system")

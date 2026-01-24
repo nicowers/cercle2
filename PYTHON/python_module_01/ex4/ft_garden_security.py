@@ -12,14 +12,14 @@ class SecurePlant:
         self.__age = age
 
     @property
-    def height(self) -> str:
+    def height(self) -> int:
         """
         Reading without modification.
         """
         return (self.__height)
 
     @height.setter
-    def height(self, height: int) -> str:
+    def height(self, height: int) -> None:
         """
         Modify the values of our variable.
         """
@@ -38,7 +38,7 @@ class SecurePlant:
         return (self.__age)
 
     @age.setter
-    def age(self, age: int) -> str:
+    def age(self, age: int) -> None:
         """
         Modify the values of our variables.
         """
