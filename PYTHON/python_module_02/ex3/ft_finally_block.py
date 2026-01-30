@@ -1,17 +1,20 @@
-def water_plants(plant_list : list) -> str:
-    """Water each plant in the list and ensure cleanup even if an error occurs."""
+def water_plants(plant_list: list) -> None:
+    """
+    Water each plant in the list and ensure cleanup even if an error occurs.
+    """
     str = ""
     print("Opening watering system")
     try:
         for plant in plant_list:
-            str = "Watering " + plant + ""
+            str = "Watering " + plant
             print(str)
     except TypeError:
         print("Error: Cannot water None - invalid plant!")
     finally:
-         print("Closing watering system (cleanup)")
+        print("Closing watering system (cleanup)")
 
-def test_watering_system():
+
+def test_watering_system() -> None:
     """Test the watering system with valid and invalid plant lists."""
     print("=== Garden Watering System ===\n")
     print("Testing normal watering...")
@@ -23,5 +26,6 @@ def test_watering_system():
     water_plants(plant_list)
     print("\nCleanup always happens, even with errors!")
 
-if __name__== "__main__":
-	test_watering_system()
+
+if __name__ == "__main__":
+    test_watering_system()

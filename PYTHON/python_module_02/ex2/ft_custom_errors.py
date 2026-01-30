@@ -2,15 +2,18 @@ class GardenError(Exception):
     """Base exception class for all garden-related errors."""
     pass
 
+
 class PlantError(GardenError):
     """Exception raised for plant-related problems."""
-    def __init__(self, message="The tomato plant is wilting!"):
+    def __init__(self, message="The tomato plant is wilting!") -> None:
         super().__init__(message)
+
 
 class WaterError(GardenError):
     """Exception raised for watering-related problems."""
-    def __init__(self, message="Not enough water in the tank!"):
+    def __init__(self, message="Not enough water in the tank!") -> None:
         super().__init__(message)
+
 
 def raise_error() -> None:
     """Demonstrate raising and catching custom garden exceptions."""
@@ -33,6 +36,7 @@ def raise_error() -> None:
         raise WaterError
     except GardenError as e:
         print(f"Caught WaterError: {e}")
+
 
 if __name__ == "__main__":
     print("=== Custom Garden Errors Demo ===\n")

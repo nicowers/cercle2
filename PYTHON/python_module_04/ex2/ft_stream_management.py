@@ -9,6 +9,8 @@ if __name__ == "__main__":
     sys.stdout.flush()
     status = sys.stdin.readline().split("\n")[0]
     sys.stdout.write(f"\n[STANDARD] Archive status from {name}: {status}\n")
-    sys.stderr.write("[ALERT] System diagnostic: Communication channels verified\n")
+    sys.stderr.write(
+        "[ALERT] System diagnostic: Communication channels verified\n"
+        )
     sys.stdout.write("[STANDARD] Data transmission complete\n")
     print("\nThree-channel communication test successful.")

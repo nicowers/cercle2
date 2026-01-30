@@ -8,7 +8,9 @@ if __name__ == "__main__":
         for i in range(1, len(sys.argv) - 1):
             int(sys.argv[i])
         if len(sys.argv) < 2:
-            print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+            print(
+                "No scores provided. Usage: python3 "
+                "ft_score_analytics.py <score1> <score2> ...")
         elif len(sys.argv) >= 2:
             list = []
             for i in range(1, len(sys.argv)):
@@ -20,11 +22,11 @@ if __name__ == "__main__":
             mini = min(list)
             score_range = maxi - mini
             print("Scores processed:", list)
-            print("Total players:",lenght)
+            print("Total players:", lenght)
             print("Total score:", total_score)
-            print("Average score:", avg)
+            print("Average score:", round(avg, 1))
             print("High score:", maxi)
             print("Low score:", mini)
             print("Score range:", score_range)
-    except ValueError as e:
+    except ValueError:
         print(f"oops, you typed ’{sys.argv[i]}’ instead of a number")

@@ -2,9 +2,11 @@
 
 if __name__ == "__main__":
     s = {
-        "alice" : {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'},
-        "bob" : {'first_kill', 'level_10', 'boss_slayer', 'collector'},
-        "charlie" : {'level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon', 'perfectionist'}
+        "alice": {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'},
+        "bob": {'first_kill', 'level_10', 'boss_slayer', 'collector'},
+        "charlie": {
+            'level_10', 'treasure_hunter', 'boss_slayer',
+            'speed_demon', 'perfectionist'}
         }
     print("=== Achievement Tracker System ===")
     for players in s:
@@ -18,12 +20,12 @@ if __name__ == "__main__":
     print(f"All unique achievements: {all_unique_achievements}")
     print("Total unique achievements:", len(all_unique_achievements))
     print("\nCommon to all players:", common_to_all_players)
-    achievement_count = {}
+    achv_count = {}
     for achievements in s.values():
         for achievement in achievements:
-            achievement_count[achievement] = achievement_count.get(achievement, 0) + 1
+            achv_count[achievement] = achv_count.get(achievement, 0) + 1
     unique_achievements = set()
-    for achievement, count in achievement_count.items():
+    for achievement, count in achv_count.items():
         if count == 1:
             unique_achievements.add(achievement)
     print(f"Rare achievements: {unique_achievements}\n")

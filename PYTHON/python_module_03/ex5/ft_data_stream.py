@@ -1,36 +1,39 @@
 #!/usr/bin/env python3
 import time
+from typing import Iterator
 
-def event(nbr_event):
+
+def event(nbr_event: int) -> Iterator[dict[str, str | int]]:
     players = ("alice", "bob", "charlie", "david", "ethann", "faustin")
     events = ("killed monster",
-            "found treasure",
-            "leveled up",
-            "killed monster",
-            "killed monster",
-            "killed monster",
-            "killed monster",
-            "killed monster",
-            "leveled up",
-            "killed monster",
-            "killed monster",
-            "killed monster",
-            "killed monster"
-            )
+              "found treasure",
+              "leveled up",
+              "killed monster",
+              "killed monster",
+              "killed monster",
+              "killed monster",
+              "killed monster",
+              "leveled up",
+              "killed monster",
+              "killed monster",
+              "killed monster",
+              "killed monster"
+              )
     player_lvl = [5, 12, 8, 7, 3, 1]
     for i in range(nbr_event):
         index = (i % len(players))
         event_index = (i % len(events))
-        if events[event_index]== "leveled up":
+        if events[event_index] == "leveled up":
             player_lvl[index] += 1
         yield {
-            "id" : i + 1,
-            "player_level" : player_lvl[index],
-            "player" : players[index],
-            "event" : events[event_index]
+            "id": i + 1,
+            "player_level": player_lvl[index],
+            "player": players[index],
+            "event": events[event_index]
             }
 
-def stream_analytics(nbr_event, display=3):
+
+def stream_analytics(nbr_event: int, display: int = 3) -> None:
     high_level_players = treasure_events = level_up_events = 0
     print(f"\nProcessing {nbr_event} game events...\n")
     for i, events in enumerate(event(nbr_event)):
@@ -40,10 +43,10 @@ def stream_analytics(nbr_event, display=3):
             high_level_players += 1
         if events["event"] == "leveled up":
             level_up_events += 1
-        if i < display :
-            print(f"Event {events['id']}: Player {events['player']} (level {events['player_level']}) killed monster")
-    else:
-        print("...")
+        if i < display:
+            print(f"Event {events['id']}: Player {events['player']}", end="")
+            print(f"(level {events['player_level']}) killed monster")
+    print("...")
     print("\n=== Stream Analytics ===")
     print(f"Total events processed: {nbr_event}")
     print(f"High-level players (10+): {high_level_players}")
@@ -52,16 +55,16 @@ def stream_analytics(nbr_event, display=3):
     print("\nMemory usage: Constant (streaming)")
 
 
-def fibonacci():
+def fibonacci() -> Iterator[int]:
     a, b = 0, 1
     while True:
         yield a
         a, b = b, a + b
 
-def prime(n):
+
+def prime(n: int) -> Iterator[int]:
     count = 0
     number = 2
-
     while count < n:
         is_prime = True
         for i in range(2, number):
@@ -71,6 +74,7 @@ def prime(n):
             yield number
             count += 1
         number += 1
+
 
 if __name__ == "__main__":
     n = 1000

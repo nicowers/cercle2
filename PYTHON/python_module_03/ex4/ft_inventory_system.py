@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import sys
 
-def max_min(dico):
+
+def max_min(dico: dict) -> tuple:
     maxi = 0
     weapon_abundant = ""
     weapon_less_abundant = ""
@@ -16,32 +17,37 @@ def max_min(dico):
             weapon_less_abundant = item
     return (weapon_abundant, weapon_less_abundant, mini, maxi)
 
-def restock(dico):
+
+def restock(dico: dict) -> list:
     need_to_restock = []
     for item in dico:
         if dico[item] == 1:
             need_to_restock.append(item)
     return (need_to_restock)
 
-def all_keys(dico):
+
+def all_keys(dico: dict) -> list:
     keys = []
     for item in dico:
         keys.append(item)
     return (keys)
 
-def all_values(dico):
+
+def all_values(dico: dict) -> list:
     values = []
     for item in dico:
         values.append(dico[item])
     return (values)
 
-def there_is_sword(dico, bool=False):
+
+def there_is_sword(dico: dict, bool: bool = False) -> bool:
     for item in dico:
         if item == "sword":
             bool = True
     return (bool)
 
-def main():
+
+def main() -> None:
     compteur = 0
     i = 0
     dico = dict()
@@ -51,7 +57,8 @@ def main():
         for item in sys.argv[1:]:
             dico[item.split(":")[0]] = int(item.split(":")[1])
     except ValueError:
-        print("Enter a key associate to a value in the following format : \"weapon:value\"")
+        print("Enter a key associate to a value in the", end="")
+        print("following format : \"weapon:value\"")
         return
     for key, value in dico.items():
         if value >= 5:
@@ -65,7 +72,7 @@ def main():
         i += 1
     print(f"Total items in inventory: {compteur}")
     print(f"Unique item types: {i}\n")
-    print(f"=== Current Inventory ===")
+    print("=== Current Inventory ===")
     i = 0
     for item in dico:
         percentage = round(dico[item] / compteur * 100, 1)
@@ -86,6 +93,7 @@ def main():
     print(f"Dictionary keys: {all_keys(dico)}")
     print(f"Dictionary values: {all_values(dico)}")
     print(f"Sample lookup - 'sword' in inventory: {there_is_sword(dico)}")
+
 
 if __name__ == "__main__":
     main()
