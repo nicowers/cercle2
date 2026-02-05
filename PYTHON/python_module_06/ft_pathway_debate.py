@@ -9,8 +9,7 @@ if __name__ == "__main__":
     print("philosophers_stone():", philosophers_stone())
     print("elixir_of_life():", elixir_of_life())
     print("\nTesting Package Access:")
-    import alchemy
-    #est ce que c est bon comme ca??
+    import alchemy.transmutation
     print("alchemy.transmutation.lead_to_gold():", alchemy.transmutation.lead_to_gold())
     print("alchemy.transmutation.philosophers_stone():", alchemy.transmutation.philosophers_stone())
     print("\nBoth pathways work! Absolute: clear, Relative: concise")
