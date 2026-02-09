@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Dict, Union, Optional
 
+
 class DataStream(ABC):
 
     def __init__(self, stream_id: str) -> None:
@@ -10,11 +11,14 @@ class DataStream(ABC):
     def process_batch(self, data_batch: List[Any]) -> str:
         pass
 
-    def filter_data(self, data_batch: List[Any], criteria: Optional[str]= None) -> List[Any]:
+    def filter_data(
+            self, data_batch: List[Any],
+            criteria: Optional[str] = None) -> List[Any]:
         return data_batch
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
         return {"stream_id": self.stream_id}
+
 
 class SensorStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
@@ -27,7 +31,9 @@ class SensorStream(DataStream):
         avg_temp = total_temp/process if process > 0 else 0
         return avg_temp
 
-    def filter_data(self, data_batch: List[Any], criteria: Optional[str]= None) -> List[Any]:
+    def filter_data(self,
+                    data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         if criteria is None:
             return data_batch
         return [d for d in data_batch if criteria in str(d)]
@@ -36,6 +42,7 @@ class SensorStream(DataStream):
         stats = super().get_stats()
         stats["stream_type"] = "Environmental Data"
         return (stats)
+
 
 class TransactionStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
@@ -47,13 +54,16 @@ class TransactionStream(DataStream):
                 total_sum -= float(d.split(":")[1])
         return total_sum
 
-    def filter_data(self, data_batch: List[Any], criteria: Optional[str]= None) -> List[Any]:
+    def filter_data(self,
+                    data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         return super().filter_data()
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
         stats = super().get_stats()
         stats["stream_type"] = "Financial Data"
         return (stats)
+
 
 class EventStream(DataStream):
 
@@ -64,7 +74,9 @@ class EventStream(DataStream):
                 cpt += 1
         return cpt
 
-    def filter_data(self, data_batch: List[Any], criteria: Optional[str]= None) -> List[Any]:
+    def filter_data(self,
+                    data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         return super().filter_data()
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
@@ -86,17 +98,22 @@ if __name__ == "__main__":
 
     print("=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===\n")
     print("Initializing Sensor Stream...")
-    print(f"Stream ID: {sensor.get_stats().get('stream_id')}, Type: {sensor.get_stats().get('stream_type')}")
+    print("Stream ID: ")
+    print(f"{sensor.get_stats().get('stream_id')}, ")
+    print(f"Type: {sensor.get_stats().get('stream_type')}")
     print(f"Processing sensor batch: [{', '.join(sensor_list)}]")
-    
+
     if int(sensor.process_batch(sensor_list)) > 0:
-        print(f"Sensor analysis: {len(sensor_list)} readings processed", end="")
+        print("Sensor analysis: ")
+        print(f"{len(sensor_list)} readings processed", end="")
         print(f", avg temp: {sensor.process_batch(sensor_list)}°C")
     else:
         print(f"Sensor analysis: {len(sensor_list)} readings processed")
     print("\nInitializing Transaction Stream...")
 
-    print(f"Stream ID: {transaction.get_stats().get('stream_id')}, Type: {transaction.get_stats().get('stream_type')}")
+    print("Stream ID: ")
+    print(f"{transaction.get_stats().get('stream_id')}, ", end="")
+    print(f"Type: {transaction.get_stats().get('stream_type')}")
     print(f"Processing transaction batch: [{', '.join(trans_list)}]")
     print(f"Transaction analysis: {len(trans_list)} operations", end="")
     if int(transaction.process_batch(trans_list)) >= 0:
@@ -105,7 +122,9 @@ if __name__ == "__main__":
         print(f", net flow: -{transaction.process_batch(trans_list)} units")
 
     print("\nInitializing Event Stream...")
-    print(f"Stream ID: {event.get_stats().get('stream_id')}, Type: {event.get_stats().get('stream_type')}")
+    print("Stream ID: ", end="")
+    print(f"{event.get_stats().get('stream_id')}, ", end="")
+    print(f"Type: {event.get_stats().get('stream_type')}")
     print(f"Processing event batch: [{', '.join(event_list)}]")
     if "error" in event_list:
         print(f"Event analysis: {len(event_list)} events", end="")
@@ -121,6 +140,8 @@ if __name__ == "__main__":
     print(f"- Event data: {len(event_list)} events processed")
 
     print("\nStream filtering active: High-priority data only")
-    print(f"Filtered results: {len(sensor.filter_data(sensor_list, 'temp'))} critical sensor alerts, 1 large transaction")
+    print("Filtered results: ", end="")
+    print(f"{len(sensor.filter_data(sensor_list, 'temp'))} ", end="")
+    print("critical sensor alerts, 1 large transaction")
 
     print("\nAll streams processed successfully. Nexus throughput optimal")
