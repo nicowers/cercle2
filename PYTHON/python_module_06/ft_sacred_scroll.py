@@ -1,5 +1,4 @@
 import alchemy
-# est ce que c est bon
 
 if __name__ == "__main__":
     print("\n=== Sacred Scroll Mastery ===\n")
