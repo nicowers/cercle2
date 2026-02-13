@@ -8,17 +8,17 @@ if __name__ == "__main__":
     print(
         "validate_ingredients(\"dragon scales\"):",
         validate_ingredients("dragon scales"))
-    from alchemy.grimoire.spellbook import late_record_spell
     print("\nTesting spell recording with validation:")
+    from alchemy.grimoire.spellbook import record_spell
     print(
         "record_spell(\"Fireball\", \"fire air\"):",
-        late_record_spell("Fireball", "fire air"))
+        record_spell("Fireball", "fire air"))
     print(
         "record_spell(\"Dark Magic\", \"shadow\"):",
-        late_record_spell("Dark Magic", "shadow"))
-    from alchemy.grimoire.spellbook import record_spell
+        record_spell("Dark Magic", "shadow"))
+
     print("\nTesting late import technique:")
     print("record_spell(\"Lightning\", \"air\"):",
           record_spell("Lightning", "air"))
     print("\nCircular dependency curse avoided using late imports!")
-    print(" All spells processed safely!")
+    print("All spells processed safely!")

@@ -9,16 +9,18 @@ class CreatureCard(Card):
         self.health = health
         if health <= 0:
             raise ValueError("The creature needs HP to live")
+        self.type = "Creature"
+        self.effect = "Creature summoned to battlefield"
 
     def play(self, game_state: dict) -> dict:
-        game_state = {'card_played': self.name, 'mana_used': self.cost,'effect': 'Creature summoned to battlefield'}
+        game_state = {'card_played': self.name, 'mana_used': self.cost, 'effect': self.effect}
         return game_state
 
     def get_card_info(self) -> dict:
         print("CreatureCard Info:")
         card_info = {'name': self.name,
                       'cost': self.cost, 'rarity': self.rarity,
-                      'type': 'Creature', 'attack': self.attack, 'health': self.health}
+                      'type': self.type, 'attack': self.attack, 'health': self.health}
         return (card_info)
 
     def attack_target(self, target) -> dict:

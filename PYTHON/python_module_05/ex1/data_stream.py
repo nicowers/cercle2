@@ -98,20 +98,20 @@ if __name__ == "__main__":
 
     print("=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===\n")
     print("Initializing Sensor Stream...")
-    print("Stream ID: ")
-    print(f"{sensor.get_stats().get('stream_id')}, ")
+    print("Stream ID: ", end="")
+    print(f"{sensor.get_stats().get('stream_id')}, ", end="")
     print(f"Type: {sensor.get_stats().get('stream_type')}")
     print(f"Processing sensor batch: [{', '.join(sensor_list)}]")
 
     if int(sensor.process_batch(sensor_list)) > 0:
-        print("Sensor analysis: ")
+        print("Sensor analysis: ", end="")
         print(f"{len(sensor_list)} readings processed", end="")
         print(f", avg temp: {sensor.process_batch(sensor_list)}°C")
     else:
         print(f"Sensor analysis: {len(sensor_list)} readings processed")
     print("\nInitializing Transaction Stream...")
 
-    print("Stream ID: ")
+    print("Stream ID: ", end="")
     print(f"{transaction.get_stats().get('stream_id')}, ", end="")
     print(f"Type: {transaction.get_stats().get('stream_type')}")
     print(f"Processing transaction batch: [{', '.join(trans_list)}]")

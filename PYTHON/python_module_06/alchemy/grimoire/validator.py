@@ -3,5 +3,5 @@ def validate_ingredients(ingredients: str) -> str:
     parts = ingredients.split(" ")
     for element in parts:
         if element not in ingredient:
-            return "[ingredients] - INVALID"
-    return "[ingredients] - VALID"
+            return f"{ingredients} - INVALID"
+    return f"{ingredients} - VALID"

@@ -9,7 +9,7 @@ if __name__ == "__main__":
         content = f.read()
         print(content)
         print("\nData recovery complete. Storage unit disconnected.")
+        f.close()
     except FileNotFoundError:
         print(f"{file} file does not exist.")
-    finally:
-        f.close()
+

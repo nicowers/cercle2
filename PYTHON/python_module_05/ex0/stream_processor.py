@@ -123,6 +123,7 @@ if __name__ == "__main__":
         "Hello Nexus World",
         "ERROR: Connection timeout"
     ]
+    print_all = ""
     print('=== CODE NEXUS - DATA PROCESSOR FOUNDATION ===')
     try:
         for processor, data in zip(processors, data):
@@ -137,7 +138,8 @@ if __name__ == "__main__":
                 processors, [[1, 2, 3], "Hello World", "INFO: System ready"]),
                 start=1):
             result = processor.process_simultaneously(data)
-            print(f"Result {index}:", processor.format_output(result))
+            print_all = (processor.format_output(result)).split("Output:")
+            print(f"Result {index}:{print_all[1]}")
     except ValueError as e:
         print(e)
     print()
