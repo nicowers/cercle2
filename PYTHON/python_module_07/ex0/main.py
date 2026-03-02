@@ -1,8 +1,8 @@
 
 if __name__ == "__main__":
-    from ex0.CreatureCard import CreatureCard
-    creature1 = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-    creature2 = CreatureCard('Goblin Warrior', 5, 'Common', 1, 6)
+    from ex0.CreatureCard import Creature
+    creature1 = Creature('Fire Dragon', 5, 'Legendary', 7, 5)
+    creature2 = Creature('Goblin Warrior', 5, 'Common', 1, 6)
     game_state = {}
     available_mana = 6
     insufficient_mana = 3
