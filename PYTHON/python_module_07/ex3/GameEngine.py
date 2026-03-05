@@ -112,7 +112,7 @@ class GameEngine():
         }
 
     def get_engine_status(self) -> dict:
-        total_damage = sum(getattr(card, "damage", getattr(card, "power", 0))
+        total_damage = sum(getattr(card, "attack", 0)
                            for card in self.battlefield)
         return {
             'turns_simulated': self.turn_count,
