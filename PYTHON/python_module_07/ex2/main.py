@@ -1,15 +1,7 @@
 from ex2.EliteCard import EliteCard
 
 if __name__ == "__main__":
-    arcane_warrior = EliteCard(
-        name="Arcane Warrior",
-        cost=5,
-        rarity="legendary",
-        damage=5,
-        defense=3,
-        hp=10,
-        mana=4
-    )
+    arcane_warrior = EliteCard("Arcane Warrior", 5, "legendary", 5, 3, 10, 4)
 
     enemy = {"name": "Enemy", "hp": 5}
 
