@@ -74,7 +74,6 @@ class GameEngine():
     def configure_engine(self, factory: CardFactory, strategy: GameStrategy) -> None:
         self.factory = factory
         self.strategy = strategy
-        self.deck = []  # reset deck
         for _ in range(5):
             card = random.choice([
                 factory.create_creature(None),
@@ -116,7 +115,7 @@ class GameEngine():
                            for card in self.battlefield)
         return {
             'turns_simulated': self.turn_count,
-            'strategy_used': "AgrressiveStrategy",
+            'strategy_used': "AggressiveStrategy",
             'total_damage': total_damage,
-            'cards_created': len(self.deck) + len(self.hand) + len(self.battlefield)
+            'cards_created': len(self.hand) + len(self.battlefield)
         }

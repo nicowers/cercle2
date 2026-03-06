@@ -92,7 +92,6 @@ class AggressiveStrategy(GameStrategy):
                 battlefield.append(card)
 
         return {
-            "strategy": self.get_strategy_name(),
             "cards_played": cards_played,
             "mana_used": mana_used,
             "targets_attacked": ["Enemy Player"],
