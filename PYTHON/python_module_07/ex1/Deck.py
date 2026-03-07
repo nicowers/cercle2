@@ -1,10 +1,10 @@
 from ex0.Card import Card
 import random
 
+
 class Deck:
     def __init__(self):
         self.cards = []
-
 
     def add_card(self, card: Card) -> None:
         if not isinstance(card, Card):
@@ -15,7 +15,7 @@ class Deck:
         for card in self.cards:
             if card.name == card_name:
                 self.cards.remove(card)
-                return True 
+                return True
         return False
 
     def shuffle(self) -> None:

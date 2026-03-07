@@ -3,6 +3,7 @@ from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
 from ex0.CreatureCard import CreatureCard
 
+
 if __name__ == "__main__":
     spell1 = SpellCard("Lightning Bolt", 3, "rare", "damage")
     artifact1 = ArtifactCard("medallion", 3, "legendary", 3, "mana")
@@ -20,12 +21,12 @@ if __name__ == "__main__":
     print("Deck stats:", stats)
 
     print("\nDrawing and playing cards:\n")
-    game_stats = {"mana": 6, "targets": [{"name": "Goblin", "hp": 10, "attack": 2}]}
-    
+    game_stats = {"mana": 6, "targets": [{"name": "Goblin",
+                                          "hp": 10, "attack": 2}]}
     for elt in stats:
         card_drawn = deck.draw_card()
         if card_drawn:
-            print("Drew:", card_drawn.name, end ="")
+            print("Drew:", card_drawn.name, end="")
             if isinstance(card_drawn, SpellCard):
                 print(" (Spell)")
             elif isinstance(card_drawn, CreatureCard):

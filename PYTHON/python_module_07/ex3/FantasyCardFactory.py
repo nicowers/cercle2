@@ -1,11 +1,9 @@
 from ex0.CreatureCard import CreatureCard
 from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
-from ex2.EliteCard import EliteCard
-from ex2.Combatable import Combatable
-from ex2.Magical import Magical
 from ex3.CardFactory import CardFactory
 import random
+
 
 class FantasyCardFactory(CardFactory):
     def __init__(self) -> None:
@@ -28,7 +26,7 @@ class FantasyCardFactory(CardFactory):
             name = random.choice(creatures)
             power = random.randint(2, 5)
         return CreatureCard(name, cost, rarity, power, hp)
-    
+
     def create_spell(self, name_or_mana_cost) -> SpellCard:
         spells = ["Lightning Bolt", "Ice Spell"]
         rarity = random.choice(["rare", "super rare", "epic", "legendary"])
@@ -38,12 +36,12 @@ class FantasyCardFactory(CardFactory):
             cost = random.randint(2, 5)
         elif isinstance(name_or_mana_cost, int):
             name = random.choice(spells)
-            cost =name_or_mana_cost
+            cost = name_or_mana_cost
         else:
             name = random.choice(spells)
             cost = random.randint(2, 5)
         return SpellCard(name, cost, rarity, effect_type)
-    
+
     def create_artifact(self, name_or_durability) -> ArtifactCard:
         rarity = random.choice(["rare", "super rare", "epic", "legendary"])
         cost = random.randint(2, 6)
@@ -61,17 +59,14 @@ class FantasyCardFactory(CardFactory):
 
     def create_themed_deck(self, size: int) -> dict:
         deck = []
-        
         for _ in range(size):
             roll = random.random()
-            
             if roll < 0.6:
                 deck.append(self.create_creature(None))
             elif roll < 0.85:
                 deck.append(self.create_spell(None))
             else:
                 deck.append(self.create_artifact(None))
-        
         return {
             "theme": "Fantasy",
             "size": size,

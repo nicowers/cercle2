@@ -1,6 +1,7 @@
 from ex4.TournamentCard import TournamentCard
 from ex4.TournamentPlatform import TournamentPlatform
 
+
 if __name__ == "__main__":
     platform = TournamentPlatform()
     card1 = TournamentCard("Fire Dragon", 5, "rare", 10101001)
@@ -11,5 +12,35 @@ if __name__ == "__main__":
     card1_id = platform.register_card(card1)
     card2_id = platform.register_card(card2)
     match_result = platform.create_match(card1_id, card2_id)
+
+    game_state = {
+        "player1": platform.cards[card1_id],
+        "player2": platform.cards[card2_id]
+    }
+
+    result = platform.cards[card1_id].play(game_state)
+
     print("Creating tournament match...")
-    print("Match result:", match_result)
+    print("Match result:", result)
+
+    print("\nTournament Leaderboard:")
+
+    leaderboard = platform.get_leaderboard()
+
+    position = 1
+    for name in leaderboard:
+        for card in platform.cards.values():
+            if card.name == name:
+                info = card.get_rank_info()
+                print(f"{position}. {info['name']} ", end="")
+                print("- Rating: {info['rating']}", end="")
+                print(" {info['wins']}-{info['losses']})")
+                position += 1
+
+    generate_platform_report = platform.generate_tournament_report()
+
+    print("\nPlatform Report:")
+    print(generate_platform_report)
+
+    print("\n=== Tournament Platform Successfully Deployed! ===")
+    print("All abstract patterns working together harmoniously!")

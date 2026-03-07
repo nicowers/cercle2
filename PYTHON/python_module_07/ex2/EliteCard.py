@@ -1,7 +1,7 @@
-from typing import Any, List, Dict, Union, Optional
 from ex2.Combatable import Combatable
 from ex2.Magical import Magical
 from ex0.Card import Card
+
 
 class EliteCard(Card, Combatable, Magical):
     def __init__(
@@ -16,13 +16,12 @@ class EliteCard(Card, Combatable, Magical):
     def play(self, game_state: dict) -> dict:
         targets = game_state.get("targets", [])
         spell_name = game_state.get("spell_name", "Arcane Blast")
-        
         mana_cost = 3
         if self.mana >= mana_cost:
             result = self.cast_spell(spell_name, targets)
         else:
-            result = {"card_played": self.name, "effect": "Not enough mana to cast spell"}
-        
+            result = {"card_played": self.name,
+                      "effect": "Not enough mana to cast spell"}
         return result
 
     def attack(self, target) -> dict:
@@ -34,9 +33,6 @@ class EliteCard(Card, Combatable, Magical):
         target["hp"] -= damage_taken
         if target["hp"] < 0:
             target["hp"] = 0
-
-        is_dead = target["hp"] == 0
-
         return {
             "attacker": self.name,
             "target": target["name"],
@@ -69,20 +65,18 @@ class EliteCard(Card, Combatable, Magical):
         mana_cost = 3
         if self.mana < mana_cost:
             return {"error": "Not enough mana"}
-
         self.mana -= mana_cost
         for t in targets:
             if isinstance(t, dict):
                 target_names.append(t["name"])
-
             else:
                 target_names.append(str(t))
         return {
-        "caster": self.name,
-        "spell": spell_name,
-        "targets": target_names,
-        "mana_used": mana_cost
-        }
+            "caster": self.name,
+            "spell": spell_name,
+            "targets": target_names,
+            "mana_used": mana_cost
+            }
 
     def channel_mana(self, amount: int) -> dict:
         self.mana += amount
