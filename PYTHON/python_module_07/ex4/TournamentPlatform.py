@@ -11,7 +11,7 @@ class TournamentPlatform:
         self.cards[card_id] = card
         print(f"{card.name} (ID: {card_id})")
         print("- Interfaces: [Card, Combatable, Rankable]")
-        print("- Rating: self.rating")
+        print(f"- Rating: {card.rating}")
         print(f"- Record: {card.wins}-{card.losses}\n")
         return card_id
 

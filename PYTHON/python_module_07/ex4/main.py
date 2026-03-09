@@ -33,8 +33,8 @@ if __name__ == "__main__":
             if card.name == name:
                 info = card.get_rank_info()
                 print(f"{position}. {info['name']} ", end="")
-                print("- Rating: {info['rating']}", end="")
-                print(" {info['wins']}-{info['losses']})")
+                print(f"- Rating: {info['rating']}", end="")
+                print(f" {info['wins']}-{info['losses']})")
                 position += 1
 
     generate_platform_report = platform.generate_tournament_report()

@@ -30,7 +30,8 @@ class TournamentCard (Card, Combatable, Rankable):
             loser = player1_id
         winner_rating = player1.calculate_rating()
         loser_rating = player2.calculate_rating()
-        return {"winner": winner, "loser": loser, "winner_rating": winner_rating, "loser_rating": loser_rating}
+        return {"winner": winner, "loser": loser,
+                "winner_rating": winner_rating, "loser_rating": loser_rating}
 
     def defend(self, incoming_damage: int) -> dict:
         return {
@@ -75,4 +76,5 @@ class TournamentCard (Card, Combatable, Rankable):
         self.losses += 1
 
     def get_rank_info(self) -> dict:
-        return {"name": self.name, "rating": self.rating, "wins": self.wins, "losses": self.losses}
+        return {"name": self.name, "rating": self.rating,
+                "wins": self.wins, "losses": self.losses}

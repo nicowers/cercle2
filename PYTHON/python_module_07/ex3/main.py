@@ -16,7 +16,7 @@ if __name__ == "__main__":
     spell2 = factory.create_spell(3),
     artifact1 = factory.create_artifact("Ancient Ring"),
     artifact2 = factory.create_artifact(5)
-    card_created = [creature1, creature2 ,spell1 ,spell2 ,
+    card_created = [creature1, creature2, spell1, spell2,
                     artifact1, artifact2]
     engine.deck.extend(card_created)
     card = engine.deck.pop(0)

@@ -40,7 +40,10 @@ class GameEngine():
         # Jouer les cartes depuis la main
         for card_name in action.get("cards_played", []):
             card = next((c for c in self.hand if c.name == card_name), None)
-            if card is not None and self.player_mana >= getattr(card, "cost", 0):
+            if (
+                card is not None
+                and self.player_mana >= getattr(card, "cost", 0)
+            ):
                 self.player_mana -= getattr(card, "cost", 0)
                 self.hand.remove(card)
                 self.battlefield.append(card)

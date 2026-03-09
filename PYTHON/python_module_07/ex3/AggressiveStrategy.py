@@ -7,7 +7,11 @@ class AggressiveStrategy(GameStrategy):
         cards_played = []
         mana_used = 0
         damage_dealt = 0
-        hand_sorted = sorted(hand, key=lambda c: getattr(c, "attack", 0), reverse=True)
+
+        def get_attack(card):
+            return getattr(card, "attack", 0)
+
+        hand_sorted = sorted(hand, key=get_attack, reverse=True)
 
         for card in hand_sorted:
             cost = getattr(card, "cost", 0)
@@ -19,7 +23,6 @@ class AggressiveStrategy(GameStrategy):
                 cards_played.append(card.name)
                 damage_dealt += attack
                 battlefield.append(card)
-
         return {
             "cards_played": cards_played,
             "mana_used": mana_used,
