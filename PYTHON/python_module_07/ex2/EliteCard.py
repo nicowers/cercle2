@@ -6,12 +6,20 @@ from ex0.Card import Card
 class EliteCard(Card, Combatable, Magical):
     def __init__(
             self, name: str, cost: int, rarity: str,
-            damage: int, defense: int, hp: int, mana: int):
+            damage: int, defense: int, hp: int, mana: int) -> None:
         super().__init__(name, cost, rarity)
         self.damage = damage
+        if self.damage <= 0:
+            raise ValueError("Damage needs to be positiv")
         self.defense = defense
+        if self.defense <= 0:
+            raise ValueError("Defense needs to be positiv")
         self.hp = hp
+        if self.hp <= 0:
+            raise ValueError("Hp needs to be positiv")
         self.mana = mana
+        if self.mana <= 0:
+            raise ValueError("Mana needs to be positiv")
 
     def play(self, game_state: dict) -> dict:
         targets = game_state.get("targets", [])
@@ -24,7 +32,7 @@ class EliteCard(Card, Combatable, Magical):
                       "effect": "Not enough mana to cast spell"}
         return result
 
-    def attack(self, target) -> dict:
+    def attack(self, target: dict) -> dict:
         defense = target.get("defense", 0)
 
         blocked = min(defense, self.damage)

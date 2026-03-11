@@ -4,12 +4,17 @@ from ex4.Rankable import Rankable
 
 
 class TournamentCard (Card, Combatable, Rankable):
-    def __init__(self, name, cost, rarity, damage):
+    def __init__(self, name: str, cost: int,
+                 rarity: str, damage: int) -> None:
         super().__init__(name, cost, rarity)
         self.wins = 0
         self.losses = 0
         self.rating = 1200
         self.damage = damage
+        if self.cost <= 0:
+            raise ValueError("Cost needs to be positive")
+        if self.damage <= 0:
+            raise ValueError("Damage needs to be positiv")
 
     def play(self, game_state: dict) -> dict:
         player1 = game_state["player1"]
@@ -39,7 +44,7 @@ class TournamentCard (Card, Combatable, Rankable):
             "damage_received": incoming_damage
         }
 
-    def attack(self, target) -> dict:
+    def attack(self, target: Card | Combatable) -> dict:
         result = target.defend(self.damage)
 
         return {

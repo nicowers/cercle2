@@ -11,7 +11,8 @@ class FantasyCardFactory(CardFactory):
         self.spell_types = ["fireball", "icebolt"]
         self.artifact_types = ["mana_ring", "magic_staff"]
 
-    def create_creature(self, name_or_power) -> CreatureCard:
+    def create_creature(self, name_or_power:
+                        str | int | None = None) -> CreatureCard:
         creatures = ["Goblin Warrior", "Fire Dragon"]
         cost = random.choice([2, 4, 3, 5])
         rarity = random.choice(["rare", "super rare", "epic", "legendary"])
@@ -27,7 +28,8 @@ class FantasyCardFactory(CardFactory):
             power = random.randint(2, 5)
         return CreatureCard(name, cost, rarity, power, hp)
 
-    def create_spell(self, name_or_mana_cost) -> SpellCard:
+    def create_spell(self,
+                     name_or_mana_cost: str | int | None = None) -> SpellCard:
         spells = ["Lightning Bolt", "Ice Spell"]
         rarity = random.choice(["rare", "super rare", "epic", "legendary"])
         effect_type = random.choice(["buff", "heal", "damage", "debuff"])
@@ -42,7 +44,8 @@ class FantasyCardFactory(CardFactory):
             cost = random.randint(2, 5)
         return SpellCard(name, cost, rarity, effect_type)
 
-    def create_artifact(self, name_or_durability) -> ArtifactCard:
+    def create_artifact(self, name_or_durability:
+                        str | int | None = None) -> ArtifactCard:
         rarity = random.choice(["rare", "super rare", "epic", "legendary"])
         cost = random.randint(2, 6)
         effect = random.choice(["mana", "heal", "damage"])

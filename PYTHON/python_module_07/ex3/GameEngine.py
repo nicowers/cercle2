@@ -29,15 +29,11 @@ class GameEngine():
     def simulate_turn(self) -> dict:
         self.turn_count += 1
 
-        # Piocher une carte
         if self.deck:
             card = self.deck.pop(0)
             self.hand.append(card)
 
-        # Décider de l'action avec la stratégie
         action = self.strategy.execute_turn(self.hand, self.battlefield)
-
-        # Jouer les cartes depuis la main
         for card_name in action.get("cards_played", []):
             card = next((c for c in self.hand if c.name == card_name), None)
             if (

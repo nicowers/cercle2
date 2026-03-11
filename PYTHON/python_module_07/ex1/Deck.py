@@ -3,8 +3,8 @@ import random
 
 
 class Deck:
-    def __init__(self):
-        self.cards = []
+    def __init__(self) -> None:
+        self.cards: list[Card] = []
 
     def add_card(self, card: Card) -> None:
         if not isinstance(card, Card):
@@ -49,5 +49,5 @@ class Deck:
             "creatures": creatures,
             "spells": spells,
             "artifacts": artifacts,
-            "avg_cost": avg_cost
+            "avg_cost": avg_cost,
         }

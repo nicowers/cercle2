@@ -3,12 +3,9 @@ from ex3.AggressiveStrategy import AggressiveStrategy
 from ex3.GameEngine import GameEngine
 
 if __name__ == "__main__":
-    # Création de la factory et du moteur de jeu
-
     factory = FantasyCardFactory()
     engine = GameEngine()
     strategy = engine.get_engine_status()["strategy_used"]
-    # Configuration du moteur avec la stratégie
     engine.configure_engine(factory, AggressiveStrategy())
     creature1 = factory.create_creature("Dragon King")
     creature2 = factory.create_creature(6),
@@ -29,17 +26,13 @@ if __name__ == "__main__":
 
     print("\nSimulating aggressive turn...")
 
-    # Simulation du tour
     result = engine.simulate_turn()
-
-    # Affichage de la main et du battlefield après le tour
     print("Hand:", result["hand"])
 
     print("\nTurn execution:")
     print("Strategy:", strategy)
     print("Actions:", result["action"])
 
-    # Statistiques finales
     report = engine.get_engine_status()
     print("\nGame Report:")
     print(report)
