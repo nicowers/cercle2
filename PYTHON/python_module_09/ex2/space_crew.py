@@ -32,7 +32,7 @@ class SpaceMission(BaseModel):
     budget_millions: float = Field(ge=1.0, le=10000.0)
 
     @model_validator(mode='after')
-    def mission_validation_rules(self):
+    def mission_validation_rules(self) -> "SpaceMission":
         capt_or_comm = 0
         crew_experience = 0
         if not self.mission_id.startswith("M"):
