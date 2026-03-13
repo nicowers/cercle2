@@ -27,7 +27,7 @@ def check_req(name: str) -> Tuple[bool, str | None]:
         return False, None
 
 
-def check_dependencies():
+def check_dependencies() -> dict:
     """
     Verify that all required dependencies are installed.
 
@@ -48,19 +48,16 @@ def check_dependencies():
 
 def data_analyze():
     """
-    Perform a simple data analysis pipeline.
-
-    Steps:
-    1. Generate random data using NumPy
-    2. Store the data in a Pandas DataFrame
-    3. Visualize the distribution with Matplotlib
+    Generate random data using NumPy
+    Store the data in a Pandas DataFrame
+    Visualize the distribution with Matplotlib
     """
 
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas
 
-    # Generate 1000 random data points from a normal distribution
+    # Generate 1000 random data points
     data_points = np.random.randn(1000)
 
     # Store the data inside a Pandas DataFrame
@@ -72,10 +69,10 @@ def data_analyze():
     # Plot a histogram showing the distribution of the signal values
     plt.hist(
         df["Signal_Strength"],
-        bins=30,            # number of histogram bins
-        color="purple",     # bar color
-        alpha=0.7,          # transparency
-        edgecolor="black"   # border color
+        bins=30,
+        color="purple",
+        alpha=0.7,
+        edgecolor="black"
     )
 
     # Graph labels and title
@@ -98,15 +95,10 @@ def data_analyze():
 
 
 if __name__ == "__main__":
-
-    # Program start message
     print("\nLOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
-
-    # Check all required packages
     deps = check_dependencies()
-
-    # If at least one dependency is missing, stop the program
+    print(deps)
     if not all(status[0] for status in deps.values()):
         print("\nMissing dependencies.")
         print("Install with:")
@@ -115,7 +107,6 @@ if __name__ == "__main__":
         print("poetry install")
         sys.exit(1)
 
-    # If everything is installed, run the analysis pipeline
     print("\nAnalyzing Matrix data...")
     print("Processing 1000 data points...")
     print("Generating visualization...")
