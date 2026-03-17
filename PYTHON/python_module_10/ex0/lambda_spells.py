@@ -13,7 +13,8 @@ def mage_stats(mages: list[dict]) -> dict:
 
     int_power = [elemt["power"] for elemt in mages]
     avg_power = round(sum(int_power) / len(mages) , 2)
-    return {"max_power": max_power["power"], "min_power": min_power["power"], "avg_power": avg_power}
+    return {"max_power": max_power["power"],
+            "min_power": min_power["power"], "avg_power": avg_power}
 
 if __name__ == "__main__":
     artifact = [{"name": "Fire Staff", "power": 92}, {"name": "Crystal Orb", "power": 85}]
