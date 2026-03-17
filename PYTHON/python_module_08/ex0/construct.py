@@ -1,21 +1,19 @@
-import sys   # Provides access to Python system information
-import os    # Allows interaction with the operating system
-import site  # Gives access to Python installation paths such as site-packages
+import sys
+import os
+import site
 
 
 def in_virtual_env() -> bool:
     """
     Check if the program is running inside a virtual environment.
     """
-    #sys.prefix: path of the currently active Python environment
+    # sys.prefix: path of the currently active Python environment
     # sys.base_prefix: path of the base (global) Python installation
     return sys.prefix != sys.base_prefix
 
 
 def get_venv_name() -> str | None:
     """
-    Retrieve the name of the virtual environment.
-
     os.environ allows access to system environment variables.
     'VIRTUAL_ENV' is automatically created when a virtual
     environment is activated.
@@ -24,17 +22,18 @@ def get_venv_name() -> str | None:
 
     env_path = os.environ.get("VIRTUAL_ENV")
 
-    if env_path:  # if the variable exists
+    if env_path:
         return os.path.basename(env_path)
-    return None  # otherwise return None
+    return None
 
 
 if __name__ == "__main__":
 
-    # sys.executable returns the full path of the Python interpreter currently running
+    # sys.executable returns the full path
+    # of the Python interpreter currently running
     current_python = sys.executable
 
-    # Full path to the virtual environment
+    # path to the virtual environment
     env_path = os.environ.get("VIRTUAL_ENV")
 
     # Name of the virtual environment

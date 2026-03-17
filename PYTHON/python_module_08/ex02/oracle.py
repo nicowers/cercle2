@@ -6,6 +6,7 @@ if __name__ == "__main__":
         from dotenv import load_dotenv
         # load_dotenv load all variables of our env file if it exists
         load_dotenv()
+        # getenv permit to recover data from .env file
         mode = os.getenv("MATRIX_MODE")
         url = os.getenv('DATABASE_URL')
         api_key = os.getenv('API_KEY')

@@ -30,9 +30,6 @@ def check_req(name: str) -> Tuple[bool, str | None]:
 def check_dependencies() -> dict:
     """
     Verify that all required dependencies are installed.
-
-    The function loops through the list of required packages
-    and stores the result of check_req() in a dictionary.
     """
 
     packages = ["pandas", "numpy", "matplotlib"]
@@ -98,7 +95,7 @@ if __name__ == "__main__":
     print("\nLOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
     deps = check_dependencies()
-    print(deps)
+
     if not all(status[0] for status in deps.values()):
         print("\nMissing dependencies.")
         print("Install with:")
