@@ -68,8 +68,8 @@ if __name__ == "__main__":
     print(result3())
 
     result4 = [
-        lambda : "Hello",
-        lambda : "World"
+        lambda: "Hello",
+        lambda: "World"
     ]
     final_result4 = spell_sequence(result4)
     print("\nTesting spell sequence")

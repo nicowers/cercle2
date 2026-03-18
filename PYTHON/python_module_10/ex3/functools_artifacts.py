@@ -1,6 +1,7 @@
 import functools
 import operator
 
+
 def spell_reducer(spells: list[int], operation: str) -> int:
     if operation.capitalize() == "Add":
         return (functools.reduce(operator.add, spells))
@@ -13,6 +14,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     else:
         return 0
 
+
 def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
     fire_enchant = functools.partial(base_enchantment, 50, "fire")
     ice_enchant = functools.partial(base_enchantment, 50, "ice")
@@ -21,30 +23,36 @@ def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
             "ice_enchant": ice_enchant,
             "lightning_enchant": lightning_enchant}
 
+
 @functools.lru_cache(maxsize=None)
 def memoized_fibonacci(n: int) -> int:
     if n < 2:
         return n
     return (memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2))
 
+
 def spell_dispatcher() -> callable:
     @functools.singledispatch
     def spell(x):
         return ("Unknown type")
+
     @spell.register
     def _(x: int):
         return f"Damage spell {x}"
+
     @spell.register
     def _(x: str):
         return f"Enchantment {x}"
+
     @spell.register
     def _(x: list):
         return [spell(e) for e in x]
     return spell
 
+
 if __name__ == "__main__":
     print("\nTesting spell reducer...")
-    print("Sum:", spell_reducer([10, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12, 13], "add"))
+    print("Sum:", spell_reducer([10, 9, 10, 11, 12, 13], "add"))
     print("Product:", spell_reducer([60, 10, 40, 5, 2], "multiply"))
     print("Max:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MAX"))
     print("Min:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MiN"))
