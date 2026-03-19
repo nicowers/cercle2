@@ -1,6 +1,5 @@
 from functools import wraps
 from time import perf_counter as pc
-import functools
 
 def spell_timer(func: callable) -> callable:
     @wraps(func)
@@ -38,16 +37,44 @@ def get_power(power):
     return power
 
 def retry_spell(max_attempts: int) -> callable:
-    return 
+    def decorator(func: callable):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for i in range(1, max_attempts + 1):
+                    try:
+                        res = func(*args, **kwargs)
+                        return res
+                    except ValueError:
+                        print(f"Spell failed, retrying attempt {i} on {max_attempts}")
+            return f"Spell casting failed after {max_attempts} attempts"
+        return wrapper
+    return decorator
 
+attempts = {"n": 0}
+
+@retry_spell(50)
+def trying_spell():
+    attempts["n"] += 1
+    if attempts["n"] < 10:
+        raise ValueError("Spell failed")
+    return "Spell success"
 
 class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        return
+        if len(name) < 3:
+            return False
+        for elt in name:
+            if elt.isalpha() or elt == " ":
+                continue
+            else:
+                return False
+        return True
 
+    @power_validator(10)
     def cast_spell(self, spell_name: str, power: int) -> str:
-        return 
+        return f"Successfully cast {spell_name} with {power} power"
+
 
 
 if __name__ == "__main__":
@@ -56,6 +83,14 @@ if __name__ == "__main__":
     print(result)
 
     print("\nTesting power validator")
-    print(get_power(power=51))
+    print(get_power(power=50))
 
     print('\nTesting retry spell')
+    print(trying_spell())
+
+    mage = MageGuild()
+    print("\nTesting cast spell")
+    print(mage.validate_mage_name("Dumbledore"))
+    print(mage.validate_mage_name("Chi1"))
+    print(mage.cast_spell("fireball", power=20))
+    print(mage.cast_spell("fireball", power=5))

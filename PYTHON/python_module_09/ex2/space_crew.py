@@ -111,7 +111,7 @@ def main():
         print(f"Crew size: {len(space_mission.crew)}")
         print("Crew members:")
         for crew_members in crew_team:
-            print(f"- {crew_members.name} ({crew_members.rank}) - ", end=")")
+            print(f"- {crew_members.name} ({crew_members.rank}) - ", end="")
             print(f"{crew_members.specialization}")
         print("\n=========================================")
     except Exception as e:
