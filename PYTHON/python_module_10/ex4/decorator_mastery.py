@@ -1,6 +1,7 @@
 from functools import wraps
 from time import perf_counter as pc
 
+
 def spell_timer(func: callable) -> callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -32,25 +33,30 @@ def power_validator(min_power: int) -> callable:
         return wrapper
     return decorator
 
+
 @power_validator(30)
-def get_power(power):
+def get_power(power: int):
     return power
+
 
 def retry_spell(max_attempts: int) -> callable:
     def decorator(func: callable):
         @wraps(func)
         def wrapper(*args, **kwargs):
             for i in range(1, max_attempts + 1):
-                    try:
-                        res = func(*args, **kwargs)
-                        return res
-                    except ValueError:
-                        print(f"Spell failed, retrying attempt {i} on {max_attempts}")
+                try:
+                    res = func(*args, **kwargs)
+                    return res
+                except ValueError:
+                    print(f"Spell failed, retrying attempt {i}", end="")
+                    print(f" on {max_attempts}")
             return f"Spell casting failed after {max_attempts} attempts"
         return wrapper
     return decorator
 
+
 attempts = {"n": 0}
+
 
 @retry_spell(50)
 def trying_spell():
@@ -58,6 +64,7 @@ def trying_spell():
     if attempts["n"] < 10:
         raise ValueError("Spell failed")
     return "Spell success"
+
 
 class MageGuild:
     @staticmethod
@@ -74,7 +81,6 @@ class MageGuild:
     @power_validator(10)
     def cast_spell(self, spell_name: str, power: int) -> str:
         return f"Successfully cast {spell_name} with {power} power"
-
 
 
 if __name__ == "__main__":
