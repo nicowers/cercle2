@@ -15,7 +15,7 @@ def spell_timer(func: callable) -> callable:
 
 
 @spell_timer
-def spell_cast(spell: str):
+def spell_cast(spell: str) -> str:
     return (f"{spell} cast")
 
 
@@ -35,14 +35,14 @@ def power_validator(min_power: int) -> callable:
 
 
 @power_validator(30)
-def get_power(power: int):
+def get_power(power: int) -> int:
     return power
 
 
 def retry_spell(max_attempts: int) -> callable:
-    def decorator(func: callable):
+    def decorator(func: callable) -> callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> str:
             for i in range(1, max_attempts + 1):
                 try:
                     res = func(*args, **kwargs)
@@ -59,7 +59,7 @@ attempts = {"n": 0}
 
 
 @retry_spell(50)
-def trying_spell():
+def trying_spell() -> str:
     attempts["n"] += 1
     if attempts["n"] < 10:
         raise ValueError("Spell failed")

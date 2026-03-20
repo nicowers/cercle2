@@ -22,23 +22,26 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    artifact = [{"name": "Fire Staff", "power": 92},
-                {"name": "Crystal Orb", "power": 85}]
-    mages = [{"power": 89}, {"power": 312}, {"power": 212},
-             {"power": 3102}, {"power": 214542}]
-    spells = ["Fireball", "Snowball", "Zap"]
+    artifacts = [{'name': 'Storm Crown', 'power': 64, 'type': 'relic'}, {'name': 'Shadow Blade', 'power': 106, 'type': 'armor'}, {'name': 'Storm Crown', 'power': 68, 'type': 'focus'}, {'name': 'Water Chalice', 'power': 74, 'type': 'focus'}]
+    mages = [{'name': 'Kai', 'power': 74, 'element': 'ice'}, {'name': 'River', 'power': 59, 'element': 'lightning'}, {'name': 'Sage', 'power': 86, 'element': 'ice'}, {'name': 'Morgan', 'power': 75, 'element': 'lightning'}, {'name': 'Sage', 'power': 54, 'element': 'fire'}]
+    spells = ['darkness', 'tornado', 'flash', 'lightning']
 
-    print("\nTesting artifact sorter...")
-    print(f"{artifact[0]['name']}", end="")
-    print(f" ({artifact_sorter(artifact)[0]['power']} ", end="")
-    print(f"power) comes before {artifact[1]['name']} ", end="")
-    print(f"({artifact_sorter(artifact)[1]['power']} power)")
+    print("\nTesting artifacts sorter...")
+    print(f"{artifacts[0]['name']}", end="")
+    print(f" ({artifact_sorter(artifacts)[0]['power']} ", end="")
+    print(f"power) comes before {artifacts[1]['name']} ", end="")
+    print(f"({artifact_sorter(artifacts)[1]['power']} power)")
 
     print("\nTesting power filter")
-    print(power_filter(mages, 92))
+    print(power_filter(mages, 70))
 
+    result = spell_transformer(spells)
     print("\nTesting spell transformer...")
-    print(spell_transformer(spells))
+    for i in range(len(result)):
+        if i < len(spells) - 1:
+            print(result[i], end=" ")
+        else:
+            print(result[i])
 
     print("\nTesting mage stats")
     print(mage_stats(mages))
