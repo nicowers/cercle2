@@ -1,5 +1,6 @@
 from typing import Any
 
+
 def mage_counter() -> callable:
     count = 0
 

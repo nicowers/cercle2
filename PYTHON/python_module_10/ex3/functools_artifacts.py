@@ -51,27 +51,30 @@ def spell_dispatcher() -> callable:
 
 
 if __name__ == "__main__":
-    print("\nTesting spell reducer...")
-    print("Sum:", spell_reducer([10, 9, 10, 11, 12, 13], "add"))
-    print("Product:", spell_reducer([60, 10, 40, 5, 2], "multiply"))
-    print("Max:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MAX"))
-    print("Min:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MiN"))
+    try:
+        print("\nTesting spell reducer...")
+        print("Sum:", spell_reducer([10, 9, 10, 11, 12, 13], "add"))
+        print("Product:", spell_reducer([60, 10, 40, 5, 2], "multiply"))
+        print("Max:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MAX"))
+        print("Min:", spell_reducer([1, 2, 3, 4, 32, 40, 12], "MiN"))
 
-    def base_enchantment(power: int, element: str, target: str) -> str:
-        return (f"{element} spell with {power} power hits {target}")
+        def base_enchantment(power: int, element: str, target: str) -> str:
+            return (f"{element} spell with {power} power hits {target}")
 
-    print("\nTesting partial enchanter...")
-    enchants = partial_enchanter(base_enchantment)
-    print(enchants["fire_enchant"]("dragon"))
-    print(enchants["fire_enchant"]("wizard"))
-    print(enchants["fire_enchant"]("goblin"))
+        print("\nTesting partial enchanter...")
+        enchants = partial_enchanter(base_enchantment)
+        print(enchants["fire_enchant"]("dragon"))
+        print(enchants["fire_enchant"]("wizard"))
+        print(enchants["fire_enchant"]("goblin"))
 
-    print("\nTesting memoized fibonacci...")
-    print("Fib(10):", memoized_fibonacci(10))
-    print("Fib(15):", memoized_fibonacci(15))
+        print("\nTesting memoized fibonacci...")
+        print("Fib(10):", memoized_fibonacci(10))
+        print("Fib(15):", memoized_fibonacci(15))
 
-    print("\nTesting spell dispatcher...")
-    dispatcher = spell_dispatcher()
-    print(dispatcher(5))
-    print(dispatcher("fire"))
-    print(dispatcher([1, 2, "fire", 4]))
+        print("\nTesting spell dispatcher...")
+        dispatcher = spell_dispatcher()
+        print(dispatcher(5))
+        print(dispatcher("fire"))
+        print(dispatcher([1, 2, "fire", 4]))
+    except Exception as e:
+        print(e)

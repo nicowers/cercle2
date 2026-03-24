@@ -14,11 +14,6 @@ def spell_timer(func: callable) -> callable:
     return wrapper
 
 
-@spell_timer
-def spell_cast(spell: str) -> str:
-    return (f"{spell} cast")
-
-
 def power_validator(min_power: int) -> callable:
     def decorator(func: callable):
         @wraps(func)
@@ -32,11 +27,6 @@ def power_validator(min_power: int) -> callable:
                 return "No power, please make sure to have power=..."
         return wrapper
     return decorator
-
-
-@power_validator(30)
-def get_power(power: int) -> int:
-    return power
 
 
 def retry_spell(max_attempts: int) -> callable:
@@ -53,17 +43,6 @@ def retry_spell(max_attempts: int) -> callable:
             return f"Spell casting failed after {max_attempts} attempts"
         return wrapper
     return decorator
-
-
-attempts = {"n": 0}
-
-
-@retry_spell(50)
-def trying_spell() -> str:
-    attempts["n"] += 1
-    if attempts["n"] < 10:
-        raise ValueError("Spell failed")
-    return "Spell success"
 
 
 class MageGuild:
@@ -84,19 +63,39 @@ class MageGuild:
 
 
 if __name__ == "__main__":
-    print("\nTesting spell timer...")
-    result = spell_cast("Fireball")
-    print(result)
+    try:
+        @spell_timer
+        def spell_cast(spell: str) -> str:
+            return (f"{spell} cast")
 
-    print("\nTesting power validator")
-    print(get_power(power=50))
+        @power_validator(35)
+        def get_power(power: int) -> int:
+            return power
 
-    print('\nTesting retry spell')
-    print(trying_spell())
+        attempts = {"n": 0}
 
-    mage = MageGuild()
-    print("\nTesting cast spell")
-    print(mage.validate_mage_name("Dumbledore"))
-    print(mage.validate_mage_name("Chi1"))
-    print(mage.cast_spell("fireball", power=20))
-    print(mage.cast_spell("fireball", power=5))
+        @retry_spell(50)
+        def trying_spell() -> str:
+            attempts["n"] += 1
+            if attempts["n"] < 10:
+                raise ValueError("Spell failed")
+            return "Spell success"
+
+        print("\nTesting spell timer...")
+        result = spell_cast("Fireball")
+        print(result)
+
+        print("\nTesting power validator")
+        print(get_power(power=50))
+
+        print('\nTesting retry spell')
+        print(trying_spell())
+
+        mage = MageGuild()
+        print("\nTesting cast spell")
+        print(mage.validate_mage_name("Dumbledore"))
+        print(mage.validate_mage_name("Chi1"))
+        print(mage.cast_spell("fireball", power=20))
+        print(mage.cast_spell("fireball", power=5))
+    except Exception as e:
+        print(e)

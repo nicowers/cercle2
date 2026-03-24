@@ -46,9 +46,11 @@ if __name__ == "__main__":
     print("\nTesting spell combiner...")
     print(f"Combined spell result: {final_result1[0]}, {final_result1[1]}")
 
+    def fireball(target):
+        return 10
     actuel_power = 10
     result2 = power_amplifier(
-       lambda damage: actuel_power, 3
+        fireball, 3
         )
 
     print("\nTesting power amplifier...")
